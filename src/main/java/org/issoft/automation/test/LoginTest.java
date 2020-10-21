@@ -1,6 +1,6 @@
-package test;
+package org.issoft.automation.test;
 
-import page.MainPage;
+import org.issoft.automation.page.MainPage;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,7 +12,9 @@ import java.util.concurrent.TimeUnit;
 
 public class LoginTest {
     private WebDriver driver;
-    public static final String URL = "https://www.tut.by/";
+    private static final String URL = "https://www.tut.by/";
+    private static final String LOGIN = "seleniumtests@tut.by";
+    private static final String PASSWORD = "123456789zxcvbn";
 
     @Before
     public void setUp() {
@@ -27,7 +29,7 @@ public class LoginTest {
     public void loginWithCorrectCredentials() {
         MainPage mainPage = new MainPage(driver);
         mainPage.clickLoginLink();
-        mainPage.login("seleniumtests@tut.by", "123456789zxcvbn");
+        mainPage.login(LOGIN, PASSWORD);
         String userName = mainPage.getUserNameLinkText();
         Assert.assertEquals(userName, "Selenium Test");
     }
