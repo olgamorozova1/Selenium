@@ -10,29 +10,21 @@ import java.util.List;
 
 public class TablePage {
     private WebDriver driver;
-//Could not get rid of Webdriver driver as method parameter - without it nothing is work. Why?)
+
     public void selectQuantityOfRowsInTable(WebDriver driver) {
         By showEntriesDropdown = By.xpath("//select[@name='example_length']");
         Select numberOfRowsDropdown = new Select(driver.findElement(showEntriesDropdown));
-        numberOfRowsDropdown.selectByValue("50");
+        numberOfRowsDropdown.selectByValue("10");
     }
 
-    public List<WebElement> getAllDataFromTable(WebDriver driver) {
-        List<WebElement> allInfo = new ArrayList<>();
-        List<WebElement> table = driver.findElement(By.tagName("tbody")).findElements(By.tagName("tr"));
-        for (WebElement cells : table) {
-            allInfo = cells.findElements(By.xpath("./*"));
-        }
+    public List<WebElement> getRows(WebDriver driver) {
+        List<WebElement> allInfo = driver.findElements(By.xpath(".//tbody//tr"));
         return allInfo;
     }
-//I know that there should be foreach which goes through all web elements of allInfo list but
-// I could not find appropriate xpath or other locator for td tag - so I will continue investigate this
+
     public List<EmployeeAllInfo> getEmployeeInfoOfWebElements(WebDriver driver, List<WebElement> allInfo) {
         List<EmployeeAllInfo> employeeAllInfo = new ArrayList<>();
-//this value was set as maximum number of rows when we select 50 entries in the dropdown -
-// if we would use foreach we can avoid using this variable
-        int numberOfRows = 32;
-        for (int i = 1; i <= numberOfRows; i++) {
+        for (int i = 1; i < allInfo.size(); i++) {
             String name = driver.findElement(By.xpath("//tr[" + i + "]/td[1]")).getText();
             String position = driver.findElement(By.xpath("//tr[" + i + "]/td[2]")).getText();
             String office = driver.findElement(By.xpath("//tr[" + i + "]/td[3]")).getText();
