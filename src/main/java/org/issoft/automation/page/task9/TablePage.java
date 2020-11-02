@@ -24,7 +24,7 @@ public class TablePage {
 
     public List<EmployeeAllInfo> getEmployeeInfoOfWebElements(WebDriver driver, List<WebElement> allInfo) {
         List<EmployeeAllInfo> employeeAllInfo = new ArrayList<>();
-        for (int i = 1; i < allInfo.size(); i++) {
+        for (int i = 1; i <= allInfo.size(); i++) {
             String name = driver.findElement(By.xpath("//tr[" + i + "]/td[1]")).getText();
             String position = driver.findElement(By.xpath("//tr[" + i + "]/td[2]")).getText();
             String office = driver.findElement(By.xpath("//tr[" + i + "]/td[3]")).getText();
@@ -47,4 +47,20 @@ public class TablePage {
         }
         return selectedEmployees;
     }
+
+    public List<EmployeeAllInfo> getInfoFromAllPages(WebDriver driver) {
+        TablePage tablePage = new TablePage();
+        List<EmployeeAllInfo> allInfoAboutEmployee = new ArrayList<>();
+        while (true) {
+            List<WebElement> rows = tablePage.getRows(driver);
+            List<EmployeeAllInfo> employeeInfoFromOnePage = tablePage.getEmployeeInfoOfWebElements(driver, rows);
+            allInfoAboutEmployee.addAll(employeeInfoFromOnePage);
+            //I have to find Next button in each iteration to avoid StaleReferenceException
+            if ((!driver.findElement(By.id("example_next")).getAttribute("class").contains("disabled"))) {
+                driver.findElement(By.id("example_next")).click();
+            } else break;
+        }
+        return allInfoAboutEmployee;
+    }
+
 }

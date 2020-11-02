@@ -6,9 +6,7 @@ import org.issoft.automation.page.task9.TablePage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.List;
@@ -31,13 +29,9 @@ public class SelectDataFromTable {
     public void selectDataFromTable() {
         TablePage tablePage = new TablePage();
         tablePage.selectQuantityOfRowsInTable(driver);
-        while (!driver.findElement(By.id("example_next")).getAttribute("class").contains("disabled")) {
-            List<WebElement> listOfWebElementsOfTable = tablePage.getRows(driver);
-            List<EmployeeAllInfo> allInfoAboutEmployee = tablePage.getEmployeeInfoOfWebElements(driver, listOfWebElementsOfTable);
-            List<EmployeeSelectedInfo> selectedEmployees = tablePage.selectEmployeeByAgeAndSalary(driver, allInfoAboutEmployee);
-            System.out.println(selectedEmployees);
-            driver.findElement(By.id("example_next")).click();
-        }
+        List<EmployeeAllInfo> allInfoAboutEmployee = tablePage.getInfoFromAllPages(driver);
+        List<EmployeeSelectedInfo> selectedEmployees = tablePage.selectEmployeeByAgeAndSalary(driver, allInfoAboutEmployee);
+        System.out.println(selectedEmployees);
     }
 
     @AfterEach
