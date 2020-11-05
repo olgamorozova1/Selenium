@@ -6,21 +6,19 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
-public class RefreshPageBeforeDownloadComplete {
+public class RefreshPageBeforeDownloadCompleteTest {
     private WebDriver driver;
     private static final String URL = "https://www.seleniumeasy.com/test/bootstrap-download-progress-demo.html";
+    BaseTest baseTest = new BaseTest();
 
     @BeforeEach
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        driver.get(URL);
+        driver = baseTest.setUp(URL);
     }
 
     @Test
@@ -28,18 +26,14 @@ public class RefreshPageBeforeDownloadComplete {
         WebElement button = driver.findElement(By.xpath("//button[@id='cricle-btn']"));
         button.click();
         By percentText = By.xpath("//div[@class='percenttext']");
-        int progressValue = 0;
-        while (progressValue <= 50) {
-            String progressPercent = driver.findElement(percentText).getText();
-            progressValue = Integer.parseInt(progressPercent.substring(0, progressPercent.length() - 1));
-        }
-        if (progressValue >= 50) {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        if (wait.until(ExpectedConditions.textMatches(percentText, Pattern.compile("^[5-9]\\d%$")))) {
             driver.navigate().refresh();
         }
     }
 
     @AfterEach
     public void closeBrowser() {
-        driver.quit();
+        baseTest.closeBrowser();
     }
 }

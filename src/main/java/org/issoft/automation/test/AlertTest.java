@@ -4,30 +4,26 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.concurrent.TimeUnit;
-
-public class Alert {
+public class AlertTest {
     private WebDriver driver;
     private static final String URL = "https://www.seleniumeasy.com/test/javascript-alert-box-demo.html";
+    BaseTest baseTest = new BaseTest();
+    private WebElement buttonClickMe = driver.findElement(By.xpath("//p[@id='confirm-demo']//preceding-sibling::button"));
+    private WebElement buttonClickForPromptText = driver.findElement(By.xpath("//p[@id='prompt-demo']//preceding-sibling::button"));
 
     @BeforeEach
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        driver.get(URL);
+        driver = baseTest.setUp(URL);
     }
 
     @Test
     public void acceptAlert() {
-        WebElement button = driver.findElement(By.xpath("(//button[@class='btn btn-default btn-lg'])[1]"));
-        button.click();
+        buttonClickMe.click();
         driver.switchTo().alert().accept();
         String actualText = driver.findElement(By.xpath("//p[@id='confirm-demo']")).getText();
         Assertions.assertEquals("You pressed OK!", actualText);
@@ -35,8 +31,7 @@ public class Alert {
 
     @Test
     public void declineAlert() {
-        WebElement button = driver.findElement(By.xpath("(//button[@class='btn btn-default btn-lg'])[1]"));
-        button.click();
+        buttonClickMe.click();
         driver.switchTo().alert().dismiss();
         String actualText = driver.findElement(By.xpath("//p[@id='confirm-demo']")).getText();
         Assertions.assertEquals("You pressed Cancel!", actualText);
@@ -44,24 +39,23 @@ public class Alert {
 
     @Test
     public void alertText() {
-        WebElement button = driver.findElement(By.xpath("(//button[@class='btn btn-default btn-lg'])[1]"));
-        button.click();
+        buttonClickMe.click();
         String alertText = driver.switchTo().alert().getText();
         Assertions.assertEquals("Press a button!", alertText);
     }
 
     @Test
     public void sendDataToAlert() {
-        WebElement button = driver.findElement(By.xpath("(//button[@class='btn btn-default btn-lg'])[2]"));
-        button.click();
-        driver.switchTo().alert().sendKeys("Test");
-        driver.switchTo().alert().accept();
+        buttonClickForPromptText.click();
+        Alert alert = driver.switchTo().alert();
+        alert.sendKeys("Test");
+        alert.accept();
         String actualText = driver.findElement(By.xpath("//p[@id='prompt-demo']")).getText();
         Assertions.assertEquals("You have entered 'Test' !", actualText);
     }
 
     @AfterEach
     public void closeBrowser() {
-        driver.quit();
+        baseTest.closeBrowser();
     }
 }

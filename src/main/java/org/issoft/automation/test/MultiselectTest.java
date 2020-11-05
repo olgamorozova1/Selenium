@@ -7,24 +7,19 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class Multiselect {
+public class MultiselectTest {
     private WebDriver driver;
     private static final String URL = "https://www.seleniumeasy.com/test/basic-select-dropdown-demo.html";
+    BaseTest baseTest = new BaseTest();
 
     @BeforeEach
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        driver.get(URL);
+        driver = baseTest.setUp(URL);
     }
 
     @Test
@@ -44,6 +39,6 @@ public class Multiselect {
 
     @AfterEach
     public void closeBrowser() {
-        driver.quit();
+        baseTest.closeBrowser();
     }
 }

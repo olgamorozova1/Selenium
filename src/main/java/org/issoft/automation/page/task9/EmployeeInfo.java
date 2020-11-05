@@ -1,6 +1,6 @@
 package org.issoft.automation.page.task9;
 
-public abstract class EmployeeInfo {
+public class EmployeeInfo {
     private String name;
     private String position;
     private String office;

@@ -3,7 +3,7 @@ package org.issoft.automation.page.task9;
 public class EmployeeAllInfo extends EmployeeInfo {
     private int age;
     private String startDate;
-    private int Salary;
+    private int salary;
 
     public int getAge() {
         return age;
@@ -14,7 +14,7 @@ public class EmployeeAllInfo extends EmployeeInfo {
     }
 
     public int getSalary() {
-        return Salary;
+        return salary;
     }
 
     public void setAge(int age) {
@@ -26,14 +26,14 @@ public class EmployeeAllInfo extends EmployeeInfo {
     }
 
     public void setSalary(int salary) {
-        Salary = salary;
+        salary = salary;
     }
 
     public EmployeeAllInfo(String name, String position, String office, int age, String startDate, int salary) {
         super(name, position, office);
         this.age = age;
         this.startDate = startDate;
-        Salary = salary;
+        this.salary = salary;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class EmployeeAllInfo extends EmployeeInfo {
         return "EmployeeAllInfo{ Name=" + getName() + ", position=" + getPosition() + ", office=" + getOffice() +
                 ", age=" + age +
                 ", startDate=" + startDate +
-                ", Salary=" + Salary +
+                ", Salary=" + salary +
                 "}\n";
     }
 }

@@ -11,26 +11,30 @@ import java.util.List;
 public class TablePage {
     private WebDriver driver;
 
-    public void selectQuantityOfRowsInTable(WebDriver driver) {
+    public TablePage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void selectQuantityOfRowsInTable() {
         By showEntriesDropdown = By.xpath("//select[@name='example_length']");
         Select numberOfRowsDropdown = new Select(driver.findElement(showEntriesDropdown));
         numberOfRowsDropdown.selectByValue("10");
     }
 
-    public List<WebElement> getRows(WebDriver driver) {
+    public List<WebElement> getRows() {
         List<WebElement> allInfo = driver.findElements(By.xpath(".//tbody//tr"));
         return allInfo;
     }
 
-    public List<EmployeeAllInfo> getEmployeeInfoOfWebElements(WebDriver driver, List<WebElement> allInfo) {
+    public List<EmployeeAllInfo> getEmployeeInfoOfWebElements(List<WebElement> allInfo) {
         List<EmployeeAllInfo> employeeAllInfo = new ArrayList<>();
-        for (int i = 1; i <= allInfo.size(); i++) {
-            String name = driver.findElement(By.xpath("//tr[" + i + "]/td[1]")).getText();
-            String position = driver.findElement(By.xpath("//tr[" + i + "]/td[2]")).getText();
-            String office = driver.findElement(By.xpath("//tr[" + i + "]/td[3]")).getText();
-            int age = Integer.parseInt(driver.findElement(By.xpath("//tr[" + i + "]/td[4]")).getText());
-            String startDate = driver.findElement(By.xpath("//tr[" + i + "]/td[5]")).getText();
-            String salaryString = driver.findElement(By.xpath("//tr[" + i + "]/td[6]")).getText();
+        for (WebElement employeeInfo : allInfo) {
+            String name = employeeInfo.findElement(By.xpath("./td[1]")).getText();
+            String position = employeeInfo.findElement(By.xpath("./td[2]")).getText();
+            String office = employeeInfo.findElement(By.xpath("./td[3]")).getText();
+            int age = Integer.parseInt(employeeInfo.findElement(By.xpath("./td[4]")).getText());
+            String startDate = employeeInfo.findElement(By.xpath("./td[5]")).getText();
+            String salaryString = employeeInfo.findElement(By.xpath("./td[6]")).getText();
             salaryString = salaryString.substring(1, salaryString.length() - 2).replaceAll(",", "");
             int salary = Integer.parseInt(salaryString);
             employeeAllInfo.add(new EmployeeAllInfo(name, position, office, age, startDate, salary));
@@ -38,22 +42,22 @@ public class TablePage {
         return employeeAllInfo;
     }
 
-    public List<EmployeeSelectedInfo> selectEmployeeByAgeAndSalary(WebDriver driver, List<EmployeeAllInfo> employeeAllInfo) {
-        List<EmployeeSelectedInfo> selectedEmployees = new ArrayList<>();
+    public List<EmployeeInfo> selectEmployeeByAgeAndSalary(List<EmployeeAllInfo> employeeAllInfo) {
+        List<EmployeeInfo> selectedEmployees = new ArrayList<>();
         for (EmployeeAllInfo employee : employeeAllInfo) {
             if (employee.getAge() > 30 && employee.getSalary() < 200000) {
-                selectedEmployees.add(new EmployeeSelectedInfo(employee.getName(), employee.getPosition(), employee.getOffice()));
+                selectedEmployees.add(new EmployeeInfo(employee.getName(), employee.getPosition(), employee.getOffice()));
             }
         }
         return selectedEmployees;
     }
 
-    public List<EmployeeAllInfo> getInfoFromAllPages(WebDriver driver) {
-        TablePage tablePage = new TablePage();
+    public List<EmployeeAllInfo> getInfoFromAllPages() {
+        TablePage tablePage = new TablePage(driver);
         List<EmployeeAllInfo> allInfoAboutEmployee = new ArrayList<>();
         while (true) {
-            List<WebElement> rows = tablePage.getRows(driver);
-            List<EmployeeAllInfo> employeeInfoFromOnePage = tablePage.getEmployeeInfoOfWebElements(driver, rows);
+            List<WebElement> rows = tablePage.getRows();
+            List<EmployeeAllInfo> employeeInfoFromOnePage = tablePage.getEmployeeInfoOfWebElements(rows);
             allInfoAboutEmployee.addAll(employeeInfoFromOnePage);
             //I have to find Next button in each iteration to avoid StaleReferenceException
             if ((!driver.findElement(By.id("example_next")).getAttribute("class").contains("disabled"))) {
