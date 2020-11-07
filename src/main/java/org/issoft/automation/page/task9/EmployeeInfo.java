@@ -46,4 +46,14 @@ public class EmployeeInfo {
                 ", office='" + office + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmployeeInfo that = (EmployeeInfo) o;
+        return name.equals(that.name) &&
+                position.equals(that.position) &&
+                office.equals(that.office);
+    }
 }

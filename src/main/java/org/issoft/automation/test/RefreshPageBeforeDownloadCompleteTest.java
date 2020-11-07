@@ -1,5 +1,6 @@
 package org.issoft.automation.test;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -26,5 +27,7 @@ public class RefreshPageBeforeDownloadCompleteTest extends BaseTest {
         if (wait.until(ExpectedConditions.textMatches(percentText, Pattern.compile("^[5-9]\\d%$")))) {
             driver.navigate().refresh();
         }
+        String percentValue = driver.findElement(percentText).getText();
+        Assertions.assertTrue(percentValue.equals("0%"));
     }
 }

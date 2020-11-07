@@ -8,12 +8,10 @@ import org.openqa.selenium.By;
 
 public class AlertTest extends BaseTest {
     private static final String URL = "https://www.seleniumeasy.com/test/javascript-alert-box-demo.html";
-//    private WebElement buttonClickMe = driver.findElement(By.xpath("//p[@id='confirm-demo']//preceding-sibling::button"));
-//    private WebElement buttonClickForPromptText = driver.findElement(By.xpath("//p[@id='prompt-demo']//preceding-sibling::button"));
 
     @BeforeEach
     public void setUp() {
-       super.setUp(URL);
+        super.setUp(URL);
     }
 
     @Test

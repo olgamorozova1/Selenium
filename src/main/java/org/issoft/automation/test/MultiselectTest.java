@@ -29,7 +29,6 @@ public class MultiselectTest extends BaseTest {
         expectedSelectedValues.add(driver.findElement(By.xpath("//option[@value='California']")));
         expectedSelectedValues.add(driver.findElement(By.xpath("//option[@value='New York']")));
         expectedSelectedValues.add(driver.findElement(By.xpath("//option[@value='Pennsylvania']")));
-        System.out.println(expectedSelectedValues);
         Assertions.assertEquals(selectedValues, expectedSelectedValues);
     }
 }
