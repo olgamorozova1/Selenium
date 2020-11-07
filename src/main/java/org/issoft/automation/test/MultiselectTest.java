@@ -1,25 +1,21 @@
 package org.issoft.automation.test;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultiselectTest {
-    private WebDriver driver;
+public class MultiselectTest extends BaseTest {
     private static final String URL = "https://www.seleniumeasy.com/test/basic-select-dropdown-demo.html";
-    BaseTest baseTest = new BaseTest();
 
     @BeforeEach
     public void setUp() {
-        driver = baseTest.setUp(URL);
+        super.setUp(URL);
     }
 
     @Test
@@ -35,10 +31,5 @@ public class MultiselectTest {
         expectedSelectedValues.add(driver.findElement(By.xpath("//option[@value='Pennsylvania']")));
         System.out.println(expectedSelectedValues);
         Assertions.assertEquals(selectedValues, expectedSelectedValues);
-    }
-
-    @AfterEach
-    public void closeBrowser() {
-        baseTest.closeBrowser();
     }
 }

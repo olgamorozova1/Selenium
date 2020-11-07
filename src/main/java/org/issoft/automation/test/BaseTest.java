@@ -1,12 +1,13 @@
 package org.issoft.automation.test;
 
+import org.junit.jupiter.api.AfterEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    private WebDriver driver;
+    protected WebDriver driver;
 
     public WebDriver setUp(String URL) {
         System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
@@ -17,6 +18,7 @@ public class BaseTest {
         return driver;
     }
 
+    @AfterEach
     public void closeBrowser() {
         driver.quit();
     }

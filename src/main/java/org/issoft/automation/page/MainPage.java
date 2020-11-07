@@ -25,6 +25,10 @@ public class MainPage {
         return userNameLink;
     }
 
+    public By getLoginLink() {
+        return loginLink;
+    }
+
     public void clickLoginLink() {
         driver.findElement(loginLink).click();
     }
