@@ -1,4 +1,4 @@
-package org.issoft.automation.test;
+package org.issoft.automation.test.task40;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

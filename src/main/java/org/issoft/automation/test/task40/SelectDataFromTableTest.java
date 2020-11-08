@@ -1,8 +1,8 @@
-package org.issoft.automation.test;
+package org.issoft.automation.test.task40;
 
-import org.issoft.automation.page.task9.EmployeeAllInfo;
-import org.issoft.automation.page.task9.EmployeeInfo;
-import org.issoft.automation.page.task9.TablePage;
+import org.issoft.automation.page.task40.EmployeeAllInfo;
+import org.issoft.automation.page.task40.EmployeeInfo;
+import org.issoft.automation.page.task40.TablePage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

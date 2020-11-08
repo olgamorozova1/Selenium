@@ -2,6 +2,8 @@ package org.issoft.automation.page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainPage {
     private WebDriver driver;
@@ -10,12 +12,8 @@ public class MainPage {
     private By loginField = By.name("login");
     private By passwordField = By.xpath("//input[@name='password']");
     private By submitButton = By.xpath("//input[@value='Войти']");
-    private By registerButton = By.linkText("Зарегистрироваться");
-    private By loginWithFBAccount = By.cssSelector(".b-auth-form .social__btn--fb");
-    private By rememberMeCheckBox = By.id("memory");
-    private By forgetPasswordLink = By.partialLinkText("пароль");
-    private By allLinks = By.tagName("a");
-    private By closeButton = By.className("b-popup-close");
+    private By logoutButton = By.xpath("//a[@class='button wide auth__reg']");
+    private By userNameLinkLogedIn = By.xpath("//a[@class='enter logedin']");
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
@@ -24,24 +22,37 @@ public class MainPage {
     public By getUserNameLink() {
         return userNameLink;
     }
-
     public By getLoginLink() {
         return loginLink;
     }
-
     public void clickLoginLink() {
         driver.findElement(loginLink).click();
     }
-
     public String getUserNameLinkText() {
         return driver.findElement(userNameLink).getText();
     }
-
-    public void login(String login, String password) throws InterruptedException {
+    public void fillLoginFields(String login, String password) {
         driver.findElement(loginField).sendKeys(login);
         driver.findElement(passwordField).sendKeys(password);
-        //Thread.sleep is type of Explicit Waits as it waits for one specific event
-        Thread.sleep(3000);
         driver.findElement(submitButton).click();
+    }
+    public MainPage login (String login, String password) {
+        WebDriverWait explicitWait = new WebDriverWait(driver, 10);
+        explicitWait.until(ExpectedConditions.presenceOfElementLocated(getLoginLink()));
+        clickLoginLink();
+        fillLoginFields(login, password);
+        explicitWait.until(ExpectedConditions.presenceOfElementLocated(getUserNameLink()));
+        return new MainPage(driver);
+    }
+    public void clickUserNameLink () {
+        driver.findElement(userNameLinkLogedIn).click();
+    }
+    public void clickLogoutButton () {
+        driver.findElement(logoutButton).click();
+    }
+    public MainPage logout () {
+        clickUserNameLink();
+        clickLogoutButton();
+        return new MainPage(driver);
     }
 }
