@@ -1,41 +1,37 @@
 package org.issoft.automation.test;
 
 import org.issoft.automation.page.MainPage;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
 
-public class LoginTest {
-    private WebDriver driver;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class LoginTest extends BaseTest {
     private static final String URL = "https://www.tut.by/";
-    private static final String LOGIN = "seleniumtests@tut.by";
-    private static final String PASSWORD = "123456789zxcvbn";
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.get(URL);
+        super.setUp(URL);
     }
 
-    @Test
-    public void loginWithCorrectCredentials() {
+    @ParameterizedTest
+    @CsvSource({
+            "seleniumtests@tut.by, 123456789zxcvbn, Selenium Test",
+            "seleniumtests2@tut.by, 123456789zxcvbn, Selenium Test"
+    }
+    )
+    public void loginWithCorrectCredentials(String email, String password, String expectedUserName) throws InterruptedException {
         MainPage mainPage = new MainPage(driver);
+        WebDriverWait explicitWait = new WebDriverWait(driver, 10);
+        explicitWait.until(ExpectedConditions.presenceOfElementLocated(mainPage.getLoginLink()));
         mainPage.clickLoginLink();
-        mainPage.login(LOGIN, PASSWORD);
+        mainPage.login(email, password);
+        explicitWait.until(ExpectedConditions.presenceOfElementLocated(mainPage.getUserNameLink()));
         String userName = mainPage.getUserNameLinkText();
-        Assert.assertEquals(userName, "Selenium Test");
-    }
-
-    @After
-    public void closeBrowser() {
-        driver.quit();
+        assertEquals(userName, expectedUserName);
     }
 }

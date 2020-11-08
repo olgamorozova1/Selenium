@@ -21,6 +21,14 @@ public class MainPage {
         this.driver = driver;
     }
 
+    public By getUserNameLink() {
+        return userNameLink;
+    }
+
+    public By getLoginLink() {
+        return loginLink;
+    }
+
     public void clickLoginLink() {
         driver.findElement(loginLink).click();
     }
@@ -29,9 +37,11 @@ public class MainPage {
         return driver.findElement(userNameLink).getText();
     }
 
-    public void login(String login, String password) {
+    public void login(String login, String password) throws InterruptedException {
         driver.findElement(loginField).sendKeys(login);
         driver.findElement(passwordField).sendKeys(password);
+        //Thread.sleep is type of Explicit Waits as it waits for one specific event
+        Thread.sleep(3000);
         driver.findElement(submitButton).click();
     }
 }
