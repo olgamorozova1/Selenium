@@ -1,56 +1,67 @@
 package org.issoft.automation.page;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class MainPage {
     private WebDriver driver;
-    private By loginLink = By.xpath("//a[@class='enter']");
-    private By userNameLink = By.xpath("//a/span[@class='uname']");
-    private By loginField = By.name("login");
-    private By passwordField = By.xpath("//input[@name='password']");
-    private By submitButton = By.xpath("//input[@value='Войти']");
-    private By logoutButton = By.xpath("//a[@class='button wide auth__reg']");
-    private By userNameLinkLogedIn = By.xpath("//a[@class='enter logedin']");
+    @FindBy(xpath = "//a[@class='enter']")
+    private WebElement loginLink;
+    @FindBy(xpath = "//a/span[@class='uname']")
+    private WebElement userNameLink;
+    @FindBy(xpath = "//input[@name='login']")
+    private WebElement loginField;
+    @FindBy(xpath = "//input[@name='password']")
+    private WebElement passwordField;
+    @FindBy(xpath = "//input[@value='Войти']")
+    private WebElement submitButton;
+    @FindBy(xpath = "//a[@class='button wide auth__reg']")
+    private WebElement logoutButton;
+    @FindBy(xpath = "//a[@class='enter logedin']")
+    private WebElement userNameLinkLogedIn;
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public By getUserNameLink() {
+    public WebElement getUserNameLink() {
         return userNameLink;
     }
-    public By getLoginLink() {
+
+    public WebElement getLoginLink() {
         return loginLink;
     }
+
     public void clickLoginLink() {
-        driver.findElement(loginLink).click();
+        loginLink.click();
     }
+
     public String getUserNameLinkText() {
-        return driver.findElement(userNameLink).getText();
+        return userNameLink.getText();
     }
+
     public void fillLoginFields(String login, String password) {
-        driver.findElement(loginField).sendKeys(login);
-        driver.findElement(passwordField).sendKeys(password);
-        driver.findElement(submitButton).click();
+        loginField.sendKeys(login);
+        passwordField.sendKeys(password);
+        submitButton.click();
     }
-    public MainPage login (String login, String password) {
-        WebDriverWait explicitWait = new WebDriverWait(driver, 10);
-        explicitWait.until(ExpectedConditions.presenceOfElementLocated(getLoginLink()));
+
+    public MainPage login(String login, String password) {
         clickLoginLink();
         fillLoginFields(login, password);
-        explicitWait.until(ExpectedConditions.presenceOfElementLocated(getUserNameLink()));
         return new MainPage(driver);
     }
-    public void clickUserNameLink () {
-        driver.findElement(userNameLinkLogedIn).click();
+
+    public void clickUserNameLink() {
+        userNameLinkLogedIn.click();
     }
-    public void clickLogoutButton () {
-        driver.findElement(logoutButton).click();
+
+    public void clickLogoutButton() {
+        logoutButton.click();
     }
-    public MainPage logout () {
+
+    public MainPage logout() {
         clickUserNameLink();
         clickLogoutButton();
         return new MainPage(driver);
