@@ -1,10 +1,17 @@
 package org.issoft.automation.test;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public abstract class TestBase {
@@ -18,6 +25,18 @@ public abstract class TestBase {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.get(URL);
+    }
+
+    @AfterEach
+    void takeScreenshoot() {
+        Date date = new Date();
+        String fileName = date.toString().replace(":", "_").replace(" ", "_") + ".png";
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.moveFile(screenshot, new File("./src/main/resources/" + fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @AfterAll
