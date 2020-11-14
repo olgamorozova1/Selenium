@@ -5,8 +5,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.concurrent.TimeUnit;
-
 public abstract class TestBase {
     protected static WebDriver driver;
     private static final String URL = "https://www.tut.by/";
@@ -16,7 +14,6 @@ public abstract class TestBase {
         System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.get(URL);
     }
 

@@ -11,11 +11,13 @@ public class LoginAndLogoutTest extends TestBase {
     @Test
     public void loginWithCorrectCredentials() {
         String userName = mainPage.login("seleniumtests@tut.by", "123456789zxcvbn").getUserNameLinkText();
-        assertEquals(userName, "Selenium Test");
+        assertEquals("Selenium Test", userName);
     }
 
     @Test
     public void logout() {
         mainPage.login("seleniumtests@tut.by", "123456789zxcvbn").logout();
+        String loginLinkText = driver.findElement(mainPage.getLoginLink()).getText();
+        assertEquals("Войти", loginLinkText);
     }
 }
