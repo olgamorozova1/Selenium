@@ -33,7 +33,7 @@ public abstract class TestBase {
         String fileName = date.toString().replace(":", "_").replace(" ", "_") + ".png";
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.moveFile(screenshot, new File("./src/main/resources/" + fileName));
+            FileUtils.moveFile(screenshot, new File("./target/screenshots/" + fileName));
         } catch (IOException e) {
             e.printStackTrace();
         }
