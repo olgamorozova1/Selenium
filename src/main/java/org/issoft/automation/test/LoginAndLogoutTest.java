@@ -2,23 +2,24 @@ package org.issoft.automation.test;
 
 import org.issoft.automation.page.MainPage;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.support.PageFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LoginAndLogoutTest extends TestBase {
-    MainPage mainPage = PageFactory.initElements(driver, MainPage.class);
+    MainPage mainPage = new MainPage(driver);
 
     @Test
     public void loginWithCorrectCredentials() {
         mainPage.login("seleniumtests@tut.by", "123456789zxcvbn");
         String userName = mainPage.getUserNameLinkText();
-        assertEquals(userName, "Selenium Test");
+        assertEquals("Selenium Test", userName);
     }
 
     @Test
     public void logout() {
         mainPage.login("seleniumtests@tut.by", "123456789zxcvbn");
         mainPage.logout();
+        String loginLinkText = mainPage.getLoginLink().getText();
+        assertEquals("Войти", loginLinkText);
     }
 }
