@@ -1,4 +1,4 @@
-package org.issoft.automation.test;
+package org.issoft.automation.test.Task60PageObject;
 
 import org.issoft.automation.page.MainPage;
 import org.junit.jupiter.api.Test;
