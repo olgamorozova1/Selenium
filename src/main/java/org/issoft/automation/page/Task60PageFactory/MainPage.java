@@ -1,4 +1,4 @@
-package org.issoft.automation.page;
+package org.issoft.automation.page.Task60PageFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

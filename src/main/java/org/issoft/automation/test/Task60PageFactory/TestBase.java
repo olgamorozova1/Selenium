@@ -1,4 +1,4 @@
-package org.issoft.automation.test;
+package org.issoft.automation.test.Task60PageFactory;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
