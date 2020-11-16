@@ -1,4 +1,4 @@
-package org.issoft.automation.test;
+package org.issoft.automation.test.task40;
 
 import org.junit.jupiter.api.AfterEach;
 import org.openqa.selenium.WebDriver;

@@ -1,4 +1,4 @@
-package org.issoft.automation.page.task9;
+package org.issoft.automation.page.task40;
 
 public class EmployeeAllInfo extends EmployeeInfo {
     private int age;
