@@ -31,7 +31,7 @@ public class MainPage {
     public String getUserNameLinkText() {
         return driver.findElement(userNameLink).getText();
     }
-    public void fillLoginFields(String login, String password) {
+    public void fillLoginFieldsAndClickSubmit(String login, String password) {
         driver.findElement(loginField).sendKeys(login);
         driver.findElement(passwordField).sendKeys(password);
         driver.findElement(submitButton).click();
@@ -40,7 +40,7 @@ public class MainPage {
         WebDriverWait explicitWait = new WebDriverWait(driver, 10);
         explicitWait.until(ExpectedConditions.presenceOfElementLocated(getLoginLink()));
         clickLoginLink();
-        fillLoginFields(login, password);
+        fillLoginFieldsAndClickSubmit(login, password);
         explicitWait.until(ExpectedConditions.presenceOfElementLocated(getUserNameLink()));
         return new MainPage(driver);
     }
