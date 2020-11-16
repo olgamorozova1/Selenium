@@ -1,4 +1,4 @@
-package org.issoft.automation.test;
+package org.issoft.automation.test.Task60PageObject;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterAll;
@@ -12,7 +12,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public abstract class TestBase {
     protected static WebDriver driver;
@@ -23,7 +22,6 @@ public abstract class TestBase {
         System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.get(URL);
     }
 
