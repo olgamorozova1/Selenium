@@ -1,6 +1,6 @@
 package org.issoft.automation.test.Task60PageObject;
 
-import org.issoft.automation.page.MainPage;
+import org.issoft.automation.page.Task60PageObject.MainPage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
