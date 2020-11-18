@@ -2,10 +2,8 @@ package org.issoft.automation.test.Task60PageObject;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
-import io.qameta.allure.Features;
 import io.qameta.allure.TmsLink;
 import org.issoft.automation.page.Task60PageObject.MainPage;
-import org.issoft.automation.test.Task60PageFactory.TestBase;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
