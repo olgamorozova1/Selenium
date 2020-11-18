@@ -22,21 +22,26 @@ public class MainPage {
     public By getUserNameLink() {
         return userNameLink;
     }
+
     public By getLoginLink() {
         return loginLink;
     }
+
     public void clickLoginLink() {
         driver.findElement(loginLink).click();
     }
+
     public String getUserNameLinkText() {
         return driver.findElement(userNameLink).getText();
     }
+
     public void fillLoginFieldsAndClickSubmit(String login, String password) {
         driver.findElement(loginField).sendKeys(login);
         driver.findElement(passwordField).sendKeys(password);
         driver.findElement(submitButton).click();
     }
-    public MainPage login (String login, String password) {
+
+    public MainPage login(String login, String password) {
         WebDriverWait explicitWait = new WebDriverWait(driver, 10);
         explicitWait.until(ExpectedConditions.presenceOfElementLocated(getLoginLink()));
         clickLoginLink();
@@ -44,13 +49,16 @@ public class MainPage {
         explicitWait.until(ExpectedConditions.presenceOfElementLocated(getUserNameLink()));
         return new MainPage(driver);
     }
-    public void clickUserNameLink () {
+
+    public void clickUserNameLink() {
         driver.findElement(userNameLinkLogedIn).click();
     }
-    public void clickLogoutButton () {
+
+    public void clickLogoutButton() {
         driver.findElement(logoutButton).click();
     }
-    public MainPage logout () {
+
+    public MainPage logout() {
         clickUserNameLink();
         clickLogoutButton();
         return new MainPage(driver);
