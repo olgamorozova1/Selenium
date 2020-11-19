@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LoginAndLogoutTest extends TestBase {
+public class LoginAndLogoutTestPageFactory extends TestBasePageFactory {
     MainPage mainPage = new MainPage(driver);
 
     @Test
