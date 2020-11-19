@@ -4,6 +4,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import org.issoft.automation.page.Task60PageObject.MainPage;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LoginAndLogoutTest extends TestBase {
     MainPage mainPage = new MainPage(driver);
 
+    @Tag("Login")
     @Feature(value = "Login")
     @Description("Login with correct credentials")
     @TmsLink(value = "ST-01")
@@ -20,6 +22,7 @@ public class LoginAndLogoutTest extends TestBase {
         assertEquals("Selenium Test", userName);
     }
 
+    @Tag("Logout")
     @Feature(value = "Logout")
     @Description("Verify logout functionality")
     @TmsLink(value = "ST-02")
