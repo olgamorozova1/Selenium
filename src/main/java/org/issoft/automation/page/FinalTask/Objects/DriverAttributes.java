@@ -1,24 +1,21 @@
 package org.issoft.automation.page.FinalTask.Objects;
 
 public class DriverAttributes {
-    private String name;
+    private BrowserType name;
     private String version;
     private Boolean isRemote;
     private String remoteType;
     private String url;
     private String platform;
 
-    public DriverAttributes(String name, Boolean isRemote) {
+
+    public DriverAttributes(BrowserType name, Boolean isRemote) {
         this.name = name;
         this.isRemote = isRemote;
     }
 
-    public String getName() {
+    public BrowserType getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getVersion() {

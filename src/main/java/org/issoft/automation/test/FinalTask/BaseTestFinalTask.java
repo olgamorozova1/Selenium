@@ -1,6 +1,7 @@
 package org.issoft.automation.test.FinalTask;
 
 import org.issoft.automation.page.FinalTask.Constants.Constants;
+import org.issoft.automation.page.FinalTask.Objects.BrowserType;
 import org.issoft.automation.page.FinalTask.Objects.DriverAttributes;
 import org.issoft.automation.page.FinalTask.Objects.DriverInit;
 import org.issoft.automation.page.FinalTask.Pages.MainPageFinalTask;
@@ -22,7 +23,7 @@ public class BaseTestFinalTask {
     @BeforeAll
     static void setUp() throws MalformedURLException {
         DriverInit instanceDriver = DriverInit.getInstance();
-        DriverAttributes driverAttributes = new DriverAttributes("Chrome", false);
+        DriverAttributes driverAttributes = new DriverAttributes(BrowserType.CHROME, false);
         driver = instanceDriver.openBrowser(driverAttributes);
     }
 

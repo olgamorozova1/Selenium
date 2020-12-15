@@ -2,7 +2,9 @@ package org.issoft.automation.page.FinalTask.Objects;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -24,6 +26,7 @@ public class DriverInit {
     public static DriverInit instanceDriver = null;
     private WebDriver driver;
 
+
     private DriverInit() {
     }
 
@@ -31,21 +34,22 @@ public class DriverInit {
         if (driverAttributes.getRemote()) {
             DesiredCapabilities capabilities = null;
             switch (driverAttributes.getName()) {
-                case "Chrome":
+                case CHROME:
                     capabilities = DesiredCapabilities.chrome();
                     break;
-                case "Firefox":
+                case FIREFOX:
                     capabilities = DesiredCapabilities.firefox();
                     break;
+
             }
             driver = new RemoteWebDriver(new URL(driverAttributes.getUrl()), capabilities);
         } else {
             switch (driverAttributes.getName()) {
-                case "Chrome":
+                case CHROME:
                     System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
                     driver = new ChromeDriver();
                     break;
-                case "Firefox":
+                case FIREFOX:
                     System.setProperty("webdriver.gecko.driver", "./src/main/resources/drivers/geckodriver.exe");
                     driver = new FirefoxDriver();
                     break;
