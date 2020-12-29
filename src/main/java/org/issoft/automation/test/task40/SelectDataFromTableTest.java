@@ -36,8 +36,6 @@ public class SelectDataFromTableTest extends BaseTest {
         expectedSelectedEmployee.add(new EmployeeInfo("S. Burks", "Developer", "London"));
         Assertions.assertEquals(expectedSelectedEmployee, selectedEmployees);
 
-        Object fdsf= new Object();
-
 
 
     }
