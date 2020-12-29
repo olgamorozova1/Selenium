@@ -44,4 +44,25 @@ public class EmployeeAllInfo extends EmployeeInfo {
                 ", Salary=" + salary +
                 "}\n";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        EmployeeAllInfo that = (EmployeeAllInfo) o;
+
+        if (age != that.age) return false;
+        if (salary != that.salary) return false;
+        return startDate != null ? startDate.equals(that.startDate) : that.startDate == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = age;
+        result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+        result = 31 * result + salary;
+        return result;
+    }
 }

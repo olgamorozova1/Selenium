@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class MainPage {
     private WebDriver driver;
     private By loginLink = By.xpath("//a[@class='enter']");
+    private String userName = "//a[@class='enter']";
     private By userNameLink = By.xpath("//a/span[@class='uname']");
     private By loginField = By.name("login");
     private By passwordField = By.xpath("//input[@name='password']");
@@ -36,18 +37,17 @@ public class MainPage {
     }
 
     public void fillLoginFieldsAndClickSubmit(String login, String password) {
-        driver.findElement(loginField).sendKeys(login);
+        driver.findElement(By.name("login")).sendKeys(login);
         driver.findElement(passwordField).sendKeys(password);
         driver.findElement(submitButton).click();
     }
 
-    public MainPage login(String login, String password) {
+    public void login(String login, String password) {
         WebDriverWait explicitWait = new WebDriverWait(driver, 10);
         explicitWait.until(ExpectedConditions.presenceOfElementLocated(getLoginLink()));
         clickLoginLink();
         fillLoginFieldsAndClickSubmit(login, password);
         explicitWait.until(ExpectedConditions.presenceOfElementLocated(getUserNameLink()));
-        return new MainPage(driver);
     }
 
     public void clickUserNameLink() {

@@ -27,6 +27,7 @@ public class TablePage {
     }
 
     public List<EmployeeAllInfo> getEmployeeInfoOfWebElements(List<WebElement> allInfo) {
+        //$120,324 Yz 120324
         List<EmployeeAllInfo> employeeAllInfo = new ArrayList<>();
         for (WebElement employeeInfo : allInfo) {
             String name = employeeInfo.findElement(By.xpath("./td[1]")).getText();
@@ -38,9 +39,14 @@ public class TablePage {
             salaryString = salaryString.substring(1, salaryString.length() - 2).replaceAll(",", "");
             int salary = Integer.parseInt(salaryString);
             employeeAllInfo.add(new EmployeeAllInfo(name, position, office, age, startDate, salary));
+
         }
+
         return employeeAllInfo;
+
+
     }
+
 
     public List<EmployeeInfo> selectEmployeeByAgeAndSalary(List<EmployeeAllInfo> employeeAllInfo) {
         List<EmployeeInfo> selectedEmployees = new ArrayList<>();

@@ -3,6 +3,7 @@ package org.issoft.automation.test.FinalTask;
 import io.qameta.allure.Description;
 import io.qameta.allure.TmsLink;
 import org.issoft.automation.page.FinalTask.Constants.Constants;
+import org.issoft.automation.page.FinalTask.Pages.ProductDetailsPage;
 import org.issoft.automation.page.FinalTask.Pages.WishListPage;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
@@ -20,11 +21,11 @@ public class AddProductToAutocreatedWishList extends BaseTestFinalTask {
                 .signIn(Constants.EMAIL, Constants.PASSWORD)
                 .clickWishList();
         Assert.assertTrue(!wishListPage.isWishListExist());
-        String productName = mainPageFinalTask
+        ProductDetailsPage productDetailsPage = mainPageFinalTask
                 .clickOnWomanCategory()
                 .clickOnTheFirstItem()
-                .addToWishListLinkAndClosePopup()
-                .getProductName();
+                .addToWishListLinkAndClosePopup();
+        String productName = productDetailsPage.getProductName();
         //I know this is very bad approach to use Thread.sleep. But this is was the only way to fix the issue in firefox browser
         // "Element is not clickable at point because another element obscures it"
         //I also tried to resolve it with scrolling to this element with JavaScript and add Explicit waiter but nothing helped

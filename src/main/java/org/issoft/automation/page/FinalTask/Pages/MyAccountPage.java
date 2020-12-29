@@ -17,6 +17,7 @@ public class MyAccountPage {
     public WishListPage clickWishList() {
         if (CheckForTheExistenceOfElement.checkIfElementExists(myWishListLink, driver)) {
             driver.findElement(myWishListLink).click();
+
         }
         return new WishListPage(driver);
     }

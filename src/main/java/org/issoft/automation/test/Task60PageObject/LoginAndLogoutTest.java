@@ -4,21 +4,33 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.TmsLink;
 import org.issoft.automation.page.Task60PageObject.MainPage;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
+import static org.issoft.automation.page.FinalTask.Constants.Constants.URL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LoginAndLogoutTest extends TestBase {
-    MainPage mainPage = new MainPage(driver);
+public class LoginAndLogoutTest {
+    public WebDriver driver;
+    //MainPage mainPage = new MainPage(driver);
 
-    @Tag("Login")
-    @Feature(value = "Login")
-    @Description("Login with correct credentials")
-    @TmsLink(value = "ST-01")
+    @BeforeAll
+    public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get(URL);
+    }
+
+
     @Test
     public void loginWithCorrectCredentials() {
-        String userName = mainPage.login("seleniumtests@tut.by", "123456789zxcvbn").getUserNameLinkText();
+        MainPage mainPage = new MainPage(driver);
+        mainPage.login("seleniumtests@tut.by", "123456789zxcvbn");
+        String userName =  mainPage.getUserNameLinkText();
         assertEquals("Selenium Test", userName);
     }
 

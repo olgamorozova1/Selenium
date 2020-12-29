@@ -22,6 +22,7 @@ public class AddToCartOnCategoryPageStrategy implements AddToCartStrategy {
     public List<Product> addToCart(int quantity) {
         Actions actions = new Actions(driver);
         List<Product> listOfProduct = new ArrayList<>();
+
         for (int i = 1; i <= quantity; i++) {
             WebElement product = driver.findElement(By.xpath("(//div[@class='product-container'])[" + i + "]"));
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", product);

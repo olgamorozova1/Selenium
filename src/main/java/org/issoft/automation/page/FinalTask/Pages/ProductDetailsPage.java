@@ -32,6 +32,7 @@ public class ProductDetailsPage {
         // which helps me not to set wait before a lot of elements
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.visibilityOfElementLocated(closeCartPopUp));
+
         driver.findElement(closeCartPopUp).click();
         return this;
     }

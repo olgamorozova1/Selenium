@@ -21,7 +21,7 @@ public abstract class TestBase {
     private static final String URL = "https://www.tut.by/";
 
     @BeforeAll
-    static void setUp() {
+    void setUp() {
         System.setProperty("webdriver.chrome.driver", "./src/main/resources/drivers/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
